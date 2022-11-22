@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+.bt{
+  grid-template-columns: 3fr 1fr;
+}
+.caculater{
+  grid-template-columns: repeat(1fr);
+  row-gap: 1rem;
+}
+.numbers{
+  
+  grid-template-columns: repeat(3,1fr);
+  grid-row-end: auto;
+  gap: 1rem;
+}
+
