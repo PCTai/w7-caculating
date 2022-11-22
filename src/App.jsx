@@ -21,10 +21,12 @@ function App() {
   }
   const handleSetOperater = (e) => {
     // console.log(e.target);
-    setOperater((e.target.value))
-    if(result===''){
-      setResult(caculate);
-      setCaculate('')
+    if(caculate!=='' || (caculate ==='' && result!=='')){
+      setOperater((e.target.value))
+      if(result===''){
+        setResult(caculate);
+        setCaculate('')
+      }
     }
   }
   const handleCaculating = (e) => {
