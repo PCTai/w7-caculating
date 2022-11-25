@@ -82,8 +82,8 @@ function App() {
   //   setOperater('');
   //   setResult('');
   // }
-  const [caculate, setCaculate] = useState('');
-  const [result, setResult]=useState('0');
+  const [caculate, setCaculate] = useState('0');
+  const [result, setResult]=useState('');
 
 
   const checkIsOperater= (key) =>{
@@ -91,6 +91,11 @@ function App() {
   }
 
   const handleSetCaculateNumber = (e) =>{
+
+    if(caculate==='0'){
+      setCaculate(e.target.value);
+      return;
+    }
     const newCaculater= caculate + e.target.value;
     setCaculate(newCaculater);
   }
@@ -106,8 +111,8 @@ function App() {
     }
   }
   const handleReSet = () => {
-    setCaculate('')
-    setResult('0');
+    setCaculate('0')
+    setResult('');
   }
   function evil(fn) {
     return new Function('return ' + fn)();
@@ -115,17 +120,26 @@ function App() {
   
   
   const handleCaculating = () => {
-    if(checkIsOperater(caculate[caculate.length-1]) || caculate[0] ==='/' || caculate[0]=== '*'){
-      setResult('Error');
-      setCaculate('');
+    for(let i=0; i< caculate.length; i++){
+      if(i>0 && caculate[i]==='0' && caculate[i-1] ==='/'){
+        setResult('Khong the chia cho 0');
+        setCaculate('0');
+        return;
+      }
+    };
+    if(checkIsOperater(caculate[caculate.length-1])){
+      const newCaculater= caculate.slice(0,caculate.length-1)
+      setCaculate(newCaculater);
+      const rs= newCaculater+ ' = ' + evil(newCaculater);
+      setResult(rs);
     }else{
       if(caculate===''){
-        setResult('0');
+        setResult('');
       }
       else{
         const rs= caculate+ ' = ' + evil(caculate);
       setResult(rs)
-      setCaculate('');
+      setCaculate('0');
       }
     }
   }
